@@ -12,7 +12,11 @@ if __name__ == '__main__':
         print(f'该文件中有{len(allSheets)}个工作表')
         for sheet in allSheets:
             with app.books.add() as newBook:
-                newSheet: xw.Sheet = newBook.sheets.add(sheet.name)
-                newSheet.range('A1').value = sheet.range('A1').expand().value
+                # 第一种方式 复制工作表的内容
+                # newSheet: xw.Sheet = newBook.sheets.add(sheet.name)
+                # newSheet.range('A1').value = sheet.range('A1').expand().value
+                # 第二种方式 直接copy工作表 此时会将格式、公式复制过来
+                sheetI: xw.Sheet = sheet
+                sheetI.copy(before=newBook.sheets[-1])
                 newBook.save(f'excel\\合并工作表拆分-{sheet.name}.xlsx')
         workbook.close()

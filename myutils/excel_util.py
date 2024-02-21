@@ -17,6 +17,11 @@ def last_row(sheet: xw.Sheet) -> int:
     return sheet_used_range.last_cell.row
 
 
+# 获取单元格行高和列宽
+def get_row_height_and_column_width(xw_range: xw.Range):
+    return xw_range.row_height, xw_range.column_width
+
+
 # excel 列数转列标
 def num_to_excel_column(num: int) -> str:
     result = ''
